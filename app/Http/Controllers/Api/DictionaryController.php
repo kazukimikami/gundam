@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 
 class DictionaryController extends Controller
 {
+    //レコード全件取得
     public function index()
     {
       $dictionaries = Dictionaries::get();
@@ -17,39 +18,41 @@ class DictionaryController extends Controller
       ], 200);
     }
 
-    public function show(Request $request)
+    //レコード1件だけ取得
+    public function show($request)
     {
-      $dictionaries = Dictionaries::find($request->dictionary_id);
+      $dictionaries = Dictionaries::find($request);
 
       return response()->json($dictionaries);
     }
 
+    //新しくレコード作成
     public function create(Request $request)
     {
       $dictionaries = Dictionaries::create([
         'title' => $request->title,
         'content' => $request->content,
-        'created_at' => $request
       ]);
 
       return response()->json($dictionaries);
     }
 
+    //既存レコードの削除
     public function delete(Request $request)
     {
-      $dictionaries = Dictionaries::find($request->dictionary_id);
+      $dictionaries = Dictionaries::find($request->id);
       $dictionaries->delete();
 
       return response()->json();
     }
 
+    //既存レコードの更新
     public function update(Request $request)
     {
-      $dictionaries = Dictionaries::find($request->dictionary_id);
+      $dictionaries = Dictionaries::find($request->id);
       $dictionaries->update([
         'title' => $request->title,
         'content' => $request->content,
-        'updated_at' => $request
       ]);
 
       return response()->json($dictionaries);
