@@ -18,9 +18,8 @@ use App\Http\Controllers\Api\DictionaryController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 Route::get('index', [DictionaryController::class, 'index']);
-Route::post('index', [DictionaryController::class, 'show']);
-Route::get('index2', [DictionaryController::class, 'create']);
-Route::put('index', [DictionaryController::class, 'delete']);
-Route::delete('index', [DictionaryController::class, 'update']);
+Route::get('index/{id}', [DictionaryController::class, 'show']);
+Route::post('index', [DictionaryController::class, 'create']);
+Route::delete('index', [DictionaryController::class, 'delete']);
+Route::put('index', [DictionaryController::class, 'update']);
