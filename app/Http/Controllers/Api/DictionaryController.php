@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 
 class DictionaryController extends Controller
 {
-    //一覧取得
+    //記事の一覧取得
     public function index()
     {
       $dictionaries = Dictionaries::select('id', 'title')->get();
@@ -16,7 +16,7 @@ class DictionaryController extends Controller
       return response()->json($dictionaries);
     }
 
-    //一件の詳細取得
+    //記事の詳細取得
     public function show($request)
     {
       $dictionaries = Dictionaries::find($request, ['id', 'title', 'content', 'created_at', 'updated_at']);
@@ -24,7 +24,7 @@ class DictionaryController extends Controller
       return response()->json($dictionaries);
     }
 
-    //新規に追加
+    //記事を作成
     public function create(Request $request)
     {
       $dictionaries = Dictionaries::create([
@@ -52,7 +52,7 @@ class DictionaryController extends Controller
         'title' => $request->title,
         'content' => $request->content,
       ]);
-      $dictionaries = Dictionaries::find($request, ['id', 'title', 'content', 'created_at', 'updated_at']);
+      unset($dictionaries['deleted_at']);
 
       return response()->json($dictionaries);
     }
