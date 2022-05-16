@@ -21,5 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('index', [DictionaryController::class, 'index']);
 Route::get('index/{id}', [DictionaryController::class, 'show']);
 Route::post('index', [DictionaryController::class, 'create']);
-Route::delete('index', [DictionaryController::class, 'delete']);
 Route::put('index', [DictionaryController::class, 'update']);
+Route::delete('index', [DictionaryController::class, 'delete']);

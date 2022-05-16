@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Dictionaries;
 use App\Http\Controllers\Controller;
 
+// 記事
 class DictionaryController extends Controller
 {
-    //記事の一覧取得
     public function index()
     {
       $dictionaries = Dictionaries::select('id', 'title')->get();
@@ -16,44 +16,40 @@ class DictionaryController extends Controller
       return response()->json($dictionaries);
     }
 
-    //記事の詳細取得
     public function show($request)
     {
-      $dictionaries = Dictionaries::find($request, ['id', 'title', 'content', 'created_at', 'updated_at']);
+      $dictionary = Dictionaries::find($request, ['id', 'title', 'content', 'created_at', 'updated_at']);
 
-      return response()->json($dictionaries);
+      return response()->json($dictionary);
     }
 
-    //記事を作成
     public function create(Request $request)
     {
-      $dictionaries = Dictionaries::create([
+      $dictionary = Dictionaries::create([
         'title' => $request->title,
         'content' => $request->content,
       ]);
 
-      return response()->json($dictionaries);
+      return response()->json($dictionary);
     }
 
-    //記事を削除
-    public function delete(Request $request)
-    {
-      $dictionaries = Dictionaries::find($request->id);
-      $dictionaries->delete();
-
-      return response()->json($dictionaries);
-    }
-
-    //記事を更新
     public function update(Request $request)
     {
-      $dictionaries = Dictionaries::find($request->id);
-      $dictionaries->update([
+      $dictionary = Dictionaries::find($request->id);
+      $dictionary->update([
         'title' => $request->title,
         'content' => $request->content,
       ]);
-      unset($dictionaries['deleted_at']);
+      unset($dictionary['deleted_at']);
 
-      return response()->json($dictionaries);
+      return response()->json($dictionary);
+    }
+
+    public function delete(Request $request)
+    {
+      $dictionary = Dictionaries::find($request->id);
+      $dictionary->delete();
+
+      return response()->json($dictionary);
     }
 }
