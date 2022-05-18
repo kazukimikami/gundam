@@ -11,7 +11,8 @@ class Dictionaries extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable = ['title', 
+    use SerializeDate;
+    protected $fillable = ['title',
                           'content',
                           'created_at',
                           'updated_at',
