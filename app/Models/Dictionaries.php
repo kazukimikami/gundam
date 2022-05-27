@@ -13,9 +13,10 @@ class Dictionaries extends Model
     use SoftDeletes;
     use SerializeDate;
     protected $fillable = ['title',
-                          'content',
-                          'created_at',
-                          'updated_at',
-                          'deleted_at'
-                         ];
+                           'content',
+                           'image',
+                           'created_at',
+                           'updated_at',
+                           'deleted_at'
+                          ];
 }

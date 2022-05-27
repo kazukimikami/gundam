@@ -18,7 +18,7 @@ class DictionaryController extends Controller
 
     public function show($request)
     {
-      $dictionary = Dictionaries::find($request, ['id', 'title', 'content', 'created_at', 'updated_at']);
+      $dictionary = Dictionaries::find($request, ['id', 'title', 'content', 'image', 'created_at', 'updated_at']);
 
       return response()->json($dictionary);
     }
@@ -28,6 +28,7 @@ class DictionaryController extends Controller
       $dictionary = Dictionaries::create([
         'title' => $request->title,
         'content' => $request->content,
+        'image' => $request->image
       ]);
 
       return response()->json($dictionary);
@@ -39,6 +40,7 @@ class DictionaryController extends Controller
       $dictionary->update([
         'title' => $request->title,
         'content' => $request->content,
+        'image' => $request->image
       ]);
       unset($dictionary['deleted_at']);
 
